@@ -69,9 +69,45 @@ fun ConstraintExampleGuide(){
         val startGuide = createGuidelineFromStart(0.25f)
         val boxGreen = createRef() // este createRef es cuando se crea una sola referencia
 
-        Box(modifier = Modifier.size(125.dp).background(Color.Green).constrainAs(boxGreen){
-            top.linkTo(topGuide)
-            start.linkTo(startGuide)
-        })
+        Box(modifier = Modifier
+            .size(125.dp)
+            .background(Color.Green)
+            .constrainAs(boxGreen) {
+                top.linkTo(topGuide)
+                start.linkTo(startGuide)
+            })
+    }
+}
+
+@Preview
+@Composable
+fun ConstraintBarrier(){
+    ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+       val (boxBlue,boxGreen,boxYellow) = createRefs()
+        val barrier = createEndBarrier(boxBlue,boxGreen)
+
+
+        Box(modifier = Modifier
+            .size(125.dp)
+            .background(Color.Blue)
+            .constrainAs(boxBlue) {
+                start.linkTo(parent.start, margin = 16.dp)
+            })
+        Box(modifier = Modifier
+            .size(235.dp)
+            .background(Color.Green)
+            .constrainAs(boxGreen) {
+                top.linkTo(boxBlue.bottom)
+                start.linkTo(boxBlue.start, margin = 32.dp)
+            })
+
+        Box(modifier = Modifier
+            .size(50.dp)
+            .background(Color.Yellow)
+            .constrainAs(boxYellow) {
+                start.linkTo(barrier)
+            }) {
+
+        }
     }
 }
