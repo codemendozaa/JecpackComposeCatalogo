@@ -243,6 +243,10 @@ fun MyButtonExample(){
                 disabledContentColor = Color.Blue)) {
             Text(text = "Hola")
         }
+
+        TextButton(onClick = { /*TODO*/ }) {
+           Text(text = "soy un text button")
+        }
     }
 
 }
