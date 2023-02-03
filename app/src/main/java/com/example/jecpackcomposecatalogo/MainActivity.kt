@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     Column() {
 
                         MyTextField(myText){myText = it}
-                        MyProgress()
+                        MyProgessBarAdvance()
                     }
 
                 }
@@ -285,16 +285,49 @@ fun MyIcon(){
 
 @Composable
 fun MyProgress(){
-    Column(Modifier.padding(24.dp).fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        CircularProgressIndicator(color = Color.Green, strokeWidth = 8.dp)
-        LinearProgressIndicator(modifier = Modifier.padding(top = 32.dp), color = Color.Red, backgroundColor = Color.Blue)
+    var showLoading by rememberSaveable{ mutableStateOf(false) }
+    Column(
+        Modifier
+            .padding(24.dp)
+            .fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally)
+    {
+        if (showLoading){
+            CircularProgressIndicator(color = Color.Green, strokeWidth = 8.dp)
+            LinearProgressIndicator(modifier = Modifier.padding(top = 32.dp), color = Color.Red, backgroundColor = Color.Blue)
+        }
+            Button(onClick = { showLoading = !showLoading }) {
+                Text(text = "Cargando...")
+            }
+
+
     }
+}
+
+@Composable
+fun MyProgessBarAdvance(){
+    var progressStatus by rememberSaveable { mutableStateOf(0f) }
+   Column(
+       Modifier.fillMaxSize(),
+       verticalArrangement = Arrangement.Center,
+       horizontalAlignment = Alignment.CenterHorizontally) {
+       CircularProgressIndicator(progress = progressStatus)
+       Row(Modifier.fillMaxSize()) {
+           Button(onClick = { progressStatus += 0.1f }) {
+               Text(text = "Incrementar")
+               
+           }
+           Button(onClick = { progressStatus -= 0.1f  }) {
+               Text(text = "Reducir")
+
+           }
+       }
+   } 
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyProgress()
+        MyProgessBarAdvance()
     }
 }
