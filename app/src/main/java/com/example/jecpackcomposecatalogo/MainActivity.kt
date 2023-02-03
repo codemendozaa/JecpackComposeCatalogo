@@ -7,10 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyText()
+                    MyTextField()
                 }
             }
         }
@@ -175,10 +172,18 @@ fun MyText(){
 
 }
 
+@Composable
+fun MyTextField(){
+    var myText  by remember { mutableStateOf("") }
+
+    TextField(value = myText, onValueChange = {myText = it})
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyText()
+        MyTextField()
     }
 }
