@@ -1,8 +1,10 @@
 package com.example.jecpackcomposecatalogo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -37,8 +39,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    var myText  by remember { mutableStateOf("") }
                     Column() {
-                        MytextFieldOutLine()
+
+                        MyTextField(myText){myText = it}
                     }
 
                 }
@@ -177,10 +181,10 @@ fun MyText(){
 }
 
 @Composable
-fun MyTextField(){
-    var myText  by remember { mutableStateOf("") }
+fun MyTextField(name:String,onvalueChanged:(String)->Unit){
 
-    TextField(value = myText, onValueChange = {myText = it})
+
+    TextField(value = name, onValueChange = {onvalueChanged(it)})
 
 }
 
@@ -211,10 +215,30 @@ fun  MytextFieldOutLine(){
         )
 }
 
+@Composable
+fun MyButtonExample(){
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(24.dp)) {
+        Button(
+            onClick = { Log.i("codemendozaa","este es un ejemplo")},
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Green,
+                contentColor = Color.Red),
+            border = BorderStroke(5.dp, color = Color.Gray)
+        ) {
+            Text(text = "Hi")
+        }
+    }
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MytextFieldOutLine()
+        MyButtonExample()
     }
 }
