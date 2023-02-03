@@ -165,12 +165,11 @@ fun MyText(){
         Text(text = "This is an example", color = Color.Red)
         Text(text = "This is an example", fontWeight = FontWeight.ExtraBold)
         Text(text = "This is an example", fontWeight = FontWeight.Light)
-        Text(text = "This is an example", style = TextStyle(fontFamily = FontFamily.Cursive))
-        Text(text = "This is an example", style = TextStyle(textDecoration = TextDecoration.LineThrough))
-        Text(text = "This is an example", style = TextStyle(textDecoration = TextDecoration.Underline))
-        Text(text = "This is an example", style = TextStyle(textDecoration = TextDecoration.combine(
-            listOf(TextDecoration.LineThrough,TextDecoration.Underline)
-        )))
+        Text(text = "This is an example", fontFamily = FontFamily.Cursive)
+        Text(text = "This is an example", textDecoration = TextDecoration.LineThrough)
+        Text(text = "This is an example", textDecoration = TextDecoration.Underline)
+        Text(text = "This is an example", textDecoration = TextDecoration.combine(
+            listOf(TextDecoration.LineThrough,TextDecoration.Underline)))
         Text(text = "This is an example", fontSize = 30.sp)
     }
 
