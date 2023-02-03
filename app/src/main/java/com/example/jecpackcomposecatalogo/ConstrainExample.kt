@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -114,7 +115,7 @@ fun ConstraintBarrier(){
 }
 
 
-@Preview
+
 @Composable
 fun ConstraintChainExample(){
     ConstraintLayout(Modifier.fillMaxSize()) {
@@ -149,4 +150,40 @@ fun ConstraintChainExample(){
     }
 
 
+}
+
+@Preview
+@Composable
+fun ConstraintChainExample2(){
+    ConstraintLayout(Modifier.fillMaxSize()){
+        val (boxBlue,boxGreen,boxYellow) = createRefs()
+
+
+        Box(modifier = Modifier
+            .size(85.dp)
+            .background(Color.Blue)
+            .constrainAs(boxBlue)
+            {
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            })
+
+        Box(modifier = Modifier
+            .size(85.dp)
+            .background(Color.Green)
+            .constrainAs(boxGreen) {
+                start.linkTo(boxBlue.start)
+                end.linkTo(boxYellow.end)
+            })
+
+        Box(modifier = Modifier
+            .size(85.dp)
+            .background(Color.Yellow)
+            .constrainAs(boxYellow) {
+                start.linkTo(boxGreen.start)
+                end.linkTo(parent.end)
+            })
+
+        createVerticalChain(boxBlue,boxGreen,boxYellow, chainStyle = ChainStyle.Packed)
+    }
 }
