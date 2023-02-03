@@ -232,6 +232,17 @@ fun MyButtonExample(){
         ) {
             Text(text = "Hi")
         }
+        OutlinedButton(
+            onClick = { enabled = false},
+            enabled = false,
+            modifier = Modifier.padding(top = 5.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Green,
+                contentColor = Color.Red,
+                disabledBackgroundColor = Color.Transparent,
+                disabledContentColor = Color.Blue)) {
+            Text(text = "Hola")
+        }
     }
 
 }
