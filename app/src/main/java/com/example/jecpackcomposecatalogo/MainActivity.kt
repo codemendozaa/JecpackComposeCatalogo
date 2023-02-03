@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
                     Column() {
 
                         MyTextField(myText){myText = it}
+                        MyProgress()
                     }
 
                 }
@@ -282,10 +283,18 @@ fun MyIcon(){
         tint = Color.Green)
 }
 
+@Composable
+fun MyProgress(){
+    Column(Modifier.padding(24.dp).fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        CircularProgressIndicator(color = Color.Green, strokeWidth = 8.dp)
+        LinearProgressIndicator(modifier = Modifier.padding(top = 32.dp), color = Color.Red, backgroundColor = Color.Blue)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyIcon()
+        MyProgress()
     }
 }
