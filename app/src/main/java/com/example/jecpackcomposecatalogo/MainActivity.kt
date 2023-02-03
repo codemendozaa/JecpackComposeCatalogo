@@ -217,13 +217,14 @@ fun  MytextFieldOutLine(){
 
 @Composable
 fun MyButtonExample(){
-
+    var enabled by rememberSaveable { mutableStateOf(true) }
     Column(
         Modifier
             .fillMaxSize()
             .padding(24.dp)) {
         Button(
-            onClick = { Log.i("codemendozaa","este es un ejemplo")},
+            onClick = { enabled = false },
+            enabled = false,
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Green,
                 contentColor = Color.Red),
