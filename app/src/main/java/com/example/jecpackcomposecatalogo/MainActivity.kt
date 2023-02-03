@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +37,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MytextFieldAdvance()
+                    Column() {
+                        MytextFieldOutLine()
+                    }
+
                 }
             }
         }
@@ -190,13 +194,27 @@ fun MytextFieldAdvance() {
             it
     },
         label = { Text(text = "Escribe tu Nombre") })
+}
 
+@Composable
+fun  MytextFieldOutLine(){
+    var myText by remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = myText,
+        onValueChange= {myText = it},
+        modifier = Modifier.padding(24.dp),
+        label = { Text(text = "Hi")},
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Green,
+            unfocusedBorderColor = Color.Blue
+        )
+        )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MytextFieldAdvance()
+        MytextFieldOutLine()
     }
 }
