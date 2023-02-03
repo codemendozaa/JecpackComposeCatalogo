@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyTextField()
+                    MytextFieldAdvance()
                 }
             }
         }
@@ -180,10 +180,23 @@ fun MyTextField(){
 
 }
 
+@Composable
+fun MytextFieldAdvance() {
+    var myText by remember { mutableStateOf("") }
+    TextField(value = myText, onValueChange = {
+        myText = if (it.contains("e")) {
+            it.replace("e", "")
+        } else
+            it
+    },
+        label = { Text(text = "Escribe tu Nombre") })
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyTextField()
+        MytextFieldAdvance()
     }
 }
