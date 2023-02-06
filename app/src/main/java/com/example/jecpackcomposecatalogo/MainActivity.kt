@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     Column {
 
                         MyTextField(myText) { myText = it }
-                        MyCheckBox()
+                        MyCheckBoxWithText()
+                        MyCheckBoxWithText()
                     }
 
                 }
@@ -392,10 +393,25 @@ fun MyCheckBox() {
 
 }
 
+@Composable
+fun MyCheckBoxWithText() {
+    var state by rememberSaveable { mutableStateOf(false) }
+
+    Row(Modifier.padding(8.dp)) {
+        Checkbox(
+            checked = state,
+            onCheckedChange = { state = !state })
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = "Example 1",Modifier.padding(top = 10.dp))
+
+    }
+    
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyCheckBox()
+        MyCheckBoxWithText()
     }
 }
