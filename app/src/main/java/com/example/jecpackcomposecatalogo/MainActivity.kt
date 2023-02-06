@@ -38,6 +38,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     var myText by remember { mutableStateOf("") }
                     val mypOtions = getOptions(listOf("Code", "Example", "Check"))
+                    var selected by rememberSaveable { mutableStateOf("codeMendozaa") }
+
                     Column {
 
                         MyTextField(myText) { myText = it }
@@ -47,6 +49,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         MyRadioButton()
+                        MyRadioButtonList(selected) { selected = it }
 
 
                     }
@@ -470,15 +473,39 @@ fun MyRadioButton() {
                 disabledColor = Color.Gray
             )
         )
-        Text(text = "Example",Modifier.padding(top = 12.dp))
+        Text(text = "Example", Modifier.padding(top = 12.dp))
     }
 
+}
+
+@Composable
+fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
+    Column(Modifier.fillMaxWidth()) {
+        Row {
+            RadioButton(
+                selected = name == "Example List 1",
+                onClick = { onItemSelected("Example List 1") })
+            Text(text = "Example List 1", Modifier.padding(top = 12.dp))
+        }
+        Row {
+            RadioButton(name == "Example List 2", onClick = { onItemSelected("Example List 2") })
+            Text(text = "Example List 2", Modifier.padding(top = 12.dp))
+        }
+        Row {
+            RadioButton(name == "Example List 3", onClick = { onItemSelected("Example List 3") })
+            Text(text = "Example List 3", Modifier.padding(top = 12.dp))
+        }
+        Row {
+            RadioButton(name == "Example List 4", onClick = { onItemSelected("Example List 4") })
+            Text(text = "Example List 4", Modifier.padding(top = 12.dp))
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyRadioButton()
+
     }
 }
