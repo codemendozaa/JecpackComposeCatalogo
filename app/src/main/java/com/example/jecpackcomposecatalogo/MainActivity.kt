@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
 
                         MyRadioButton()
                         MyRadioButtonList(selected) { selected = it }
+                        MyCard()
 
 
                     }
@@ -502,10 +503,31 @@ fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
     }
 }
 
+@Composable
+fun MyCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        elevation = 12.dp,
+        shape = MaterialTheme.shapes.medium,
+        backgroundColor = Color.Blue,
+        contentColor = Color.LightGray
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = "Example..")
+            Text(text = "Example..")
+            Text(text = "Example..")
+        }
+
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-
+        MyCard()
     }
 }
