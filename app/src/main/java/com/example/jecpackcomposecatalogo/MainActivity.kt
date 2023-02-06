@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     Column {
 
                         MyTextField(myText) { myText = it }
-                        MySwitch()
+                        MyCheckBox()
                     }
 
                 }
@@ -371,7 +371,23 @@ fun MySwitch() {
             disabledUncheckedThumbColor = Color.Gray,
             disabledUncheckedTrackColor = Color.Blue
 
-            )
+        )
+    )
+
+}
+
+@Composable
+fun MyCheckBox() {
+    var state by rememberSaveable { mutableStateOf(false) }
+    Checkbox(
+        checked = state,
+        onCheckedChange = { state = !state },
+        enabled = true,
+        colors = CheckboxDefaults.colors(
+            checkedColor = Color.Green,
+            uncheckedColor = Color.Gray,
+            checkmarkColor = Color.Black
+        )
     )
 
 }
@@ -380,6 +396,6 @@ fun MySwitch() {
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MySwitch()
+        MyCheckBox()
     }
 }
