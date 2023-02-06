@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jecpackcomposecatalogo.ui.theme.CheckInfo
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,17 +36,34 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     var myText by remember { mutableStateOf("") }
+                    val mypOtions = getOptions(listOf("Code", "Example", "Check"))
                     Column {
 
                         MyTextField(myText) { myText = it }
-                        MyCheckBoxWithText()
-                        MyCheckBoxWithText()
+                        mypOtions.forEach {
+                            MyCheckBoxWithTextCompleted(it)
+                        }
+
                     }
 
                 }
             }
         }
     }
+}
+
+
+@Composable
+fun getOptions(title: List<String>): List<CheckInfo> {
+    return title.map {
+        var status by rememberSaveable { mutableStateOf(false) }
+        CheckInfo(
+            it,
+            status,
+        ) { myNewStatus -> status = myNewStatus }
+    }
+
+
 }
 
 @Composable
@@ -402,10 +420,24 @@ fun MyCheckBoxWithText() {
             checked = state,
             onCheckedChange = { state = !state })
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = "Example 1",Modifier.padding(top = 10.dp))
+        Text(text = "Example 1", Modifier.padding(top = 10.dp))
 
     }
-    
+
+}
+
+@Composable
+fun MyCheckBoxWithTextCompleted(checkInfo: CheckInfo) {
+
+    Row(Modifier.padding(8.dp)) {
+        Checkbox(
+            checked = checkInfo.selected,
+            onCheckedChange = { checkInfo.onCheckedChange(!checkInfo.selected) })
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = checkInfo.title, Modifier.padding(top = 10.dp))
+
+    }
+
 }
 
 @Preview(showBackground = true)
