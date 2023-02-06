@@ -46,6 +46,8 @@ class MainActivity : ComponentActivity() {
                             MyCheckBoxWithTextCompleted(it)
                         }
 
+                        MyRadioButton()
+
 
                     }
 
@@ -455,10 +457,28 @@ fun MyTriStatusCheckBox() {
     })
 }
 
+@Composable
+fun MyRadioButton() {
+    Row(Modifier.fillMaxWidth()) {
+        RadioButton(
+            selected = true,
+            onClick = { },
+            enabled = true,
+            colors = RadioButtonDefaults.colors(
+                selectedColor = Color.Red,
+                unselectedColor = Color.Yellow,
+                disabledColor = Color.Gray
+            )
+        )
+        Text(text = "Example",Modifier.padding(top = 12.dp))
+    }
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyTriStatusCheckBox()
+        MyRadioButton()
     }
 }
