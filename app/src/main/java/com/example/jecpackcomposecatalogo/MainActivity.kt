@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
-import com.example.jecpackcomposecatalogo.ui.theme.BasicSlider
+import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,12 +44,12 @@ class MainActivity : ComponentActivity() {
 
                     Column {
 
-                        MyTextField(myText) { myText = it }
-                        MyTriStatusCheckBox()
-                        mypOtions.forEach {
-                            MyCheckBoxWithTextCompleted(it)
-                        }
-                        BasicSlider()
+                        /* MyTextField(myText) { myText = it }
+                         MyTriStatusCheckBox()
+                         mypOtions.forEach {
+                             MyCheckBoxWithTextCompleted(it)
+                         }*/
+                        AdvanceSlider()
 
                     }
 
