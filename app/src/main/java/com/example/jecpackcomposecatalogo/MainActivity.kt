@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -51,6 +52,7 @@ class MainActivity : ComponentActivity() {
                         MyRadioButton()
                         MyRadioButtonList(selected) { selected = it }
                         MyCard()
+                        MyBadgeBox()
 
 
                     }
@@ -524,10 +526,25 @@ fun MyCard() {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun MyBadgeBox() {
+    BadgedBox(
+        badge = { Badge { Text("8") } },
+        Modifier
+            .padding(16.dp)
+            .background(Color.Yellow)
+
+
+    ) {
+        Icon(imageVector = Icons.Default.Star, contentDescription = "")
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyCard()
+        MyBadgeBox()
     }
 }
