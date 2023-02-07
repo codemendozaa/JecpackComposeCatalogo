@@ -530,14 +530,18 @@ fun MyCard() {
 @Composable
 fun MyBadgeBox() {
     BadgedBox(
-        badge = { Badge { Text("8") } },
+        badge = { Badge { Text("8", Modifier.background(Color.Yellow), color = Color.Black) } },
         Modifier
             .padding(16.dp)
-            .background(Color.Yellow)
+            .background(Color.Green)
 
 
     ) {
-        Icon(imageVector = Icons.Default.Star, contentDescription = "")
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = "",
+
+            )
     }
 }
 
