@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
 import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
+import com.example.jecpackcomposecatalogo.ui.theme.MyRangeSlider
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
                              MyCheckBoxWithTextCompleted(it)
                          }*/
                         AdvanceSlider()
+                        MyRangeSlider()
 
                     }
 
