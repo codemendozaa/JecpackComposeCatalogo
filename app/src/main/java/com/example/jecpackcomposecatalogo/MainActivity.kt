@@ -24,7 +24,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jecpackcomposecatalogo.ui.theme.CheckInfo
+import com.example.jecpackcomposecatalogo.ui.CheckInfo
+import com.example.jecpackcomposecatalogo.ui.theme.BasicSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,14 +49,7 @@ class MainActivity : ComponentActivity() {
                         mypOtions.forEach {
                             MyCheckBoxWithTextCompleted(it)
                         }
-
-                        MyRadioButton()
-                        MyRadioButtonList(selected) { selected = it }
-                        MyCard()
-                        MyBadgeBox()
-                        MyDivider()
-                        MyDropdownMenu()
-
+                        BasicSlider()
 
                     }
 

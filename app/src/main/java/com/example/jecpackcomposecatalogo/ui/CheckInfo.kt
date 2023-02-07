@@ -1,4 +1,4 @@
-package com.example.jecpackcomposecatalogo.ui.theme
+package com.example.jecpackcomposecatalogo.ui
 
 data class CheckInfo(
     val title: String,
