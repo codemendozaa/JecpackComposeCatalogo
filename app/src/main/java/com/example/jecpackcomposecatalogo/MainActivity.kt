@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
                         MyRadioButtonList(selected) { selected = it }
                         MyCard()
                         MyBadgeBox()
+                        MyDivider()
 
 
                     }
@@ -545,10 +546,20 @@ fun MyBadgeBox() {
     }
 }
 
+
+@Composable
+fun MyDivider() {
+    Divider(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp), color = Color.Red
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyBadgeBox()
+        MyDivider()
     }
 }
