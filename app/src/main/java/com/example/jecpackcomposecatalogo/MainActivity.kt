@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
             JecpackComposeCatalogoTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    //  modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     var myText by remember { mutableStateOf("") }
@@ -54,6 +54,7 @@ class MainActivity : ComponentActivity() {
                         MyCard()
                         MyBadgeBox()
                         MyDivider()
+                        MyDropdownMenu()
 
 
                     }
@@ -556,10 +557,43 @@ fun MyDivider() {
     )
 }
 
+@Composable
+fun MyDropdownMenu() {
+    var selectedText by rememberSaveable { mutableStateOf("") }
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    val desserts = listOf("Cafe", "Helado", "Chocolate", "Fruta", "Natilla")
+    Column(Modifier.padding(20.dp)) {
+        OutlinedTextField(
+            value = selectedText,
+            onValueChange = { selectedText = it },
+            enabled = false,
+            readOnly = true,
+            modifier = Modifier
+                .clickable { expanded = true }
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            Modifier.fillMaxWidth()
+        ) {
+            desserts.forEach { dessert ->
+                DropdownMenuItem(onClick = {
+                    expanded = false
+                    selectedText = dessert
+                }) {
+                    Text(text = dessert)
+                }
+            }
+        }
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JecpackComposeCatalogoTheme {
-        MyDivider()
+        MyDropdownMenu()
     }
 }
