@@ -1,6 +1,7 @@
 package com.example.jecpackcomposecatalogo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
@@ -25,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
+import com.example.jecpackcomposecatalogo.ui.MyDialog
 import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 import com.example.jecpackcomposecatalogo.ui.theme.MyRangeSlider
@@ -52,6 +54,20 @@ class MainActivity : ComponentActivity() {
                          }*/
                         AdvanceSlider()
                         MyRangeSlider()
+                        var show by rememberSaveable { mutableStateOf(false) }
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Button(onClick = { show = true }) {
+                                Text(text = "Mostrar Dialogo")
+                            }
+                            MyDialog(
+                                show = show,
+                                onDismiss = { show = false },
+                                onConfirm = { Log.i("codeMendoza", "Click") })
+                        }
+
 
                     }
 
