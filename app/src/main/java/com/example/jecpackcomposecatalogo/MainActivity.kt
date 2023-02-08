@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
-import com.example.jecpackcomposecatalogo.ui.MySimpleCustomDialog
+import com.example.jecpackcomposecatalogo.ui.MyCustomDialog
 import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 import com.example.jecpackcomposecatalogo.ui.theme.MyRangeSlider
@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
                                  onDismiss = { show = false },
                                  onConfirm = { Log.i("codeMendoza", "Click") })*/
 
-                        //Dialog customizado
+                        //MySimpleCustomDialog
                         Box(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
@@ -75,10 +75,12 @@ class MainActivity : ComponentActivity() {
                             Button(onClick = { show = true }) {
                                 Text(text = "Mostrar DialogCustom")
                             }
-                            MySimpleCustomDialog(
-                                show = show,
-                                onDismiss = { show = false },
-                            )
+                            /*  MySimpleCustomDialog(
+                                  show = show,
+                                  onDismiss = { show = false },
+                              )*/
+                            MyCustomDialog(show = show,
+                                onDismiss = { show = false })
                         }
                     }
                 }
