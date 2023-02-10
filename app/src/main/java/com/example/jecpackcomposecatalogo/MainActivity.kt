@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
-import com.example.jecpackcomposecatalogo.ui.MyCustomDialog
+import com.example.jecpackcomposecatalogo.ui.MyConfirmationDialog
 import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 import com.example.jecpackcomposecatalogo.ui.theme.MyRangeSlider
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                                   show = show,
                                   onDismiss = { show = false },
                               )*/
-                            MyCustomDialog(show = show,
+                            MyConfirmationDialog(show = show,
                                 onDismiss = { show = false })
                         }
                     }
@@ -525,10 +525,10 @@ fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
             RadioButton(name == "Example List 3", onClick = { onItemSelected("Example List 3") })
             Text(text = "Example List 3", Modifier.padding(top = 12.dp))
         }
-        Row {
+        /*Row {
             RadioButton(name == "Example List 4", onClick = { onItemSelected("Example List 4") })
             Text(text = "Example List 4", Modifier.padding(top = 12.dp))
-        }
+        }*/
     }
 }
 
