@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jecpackcomposecatalogo.ui.CheckInfo
-import com.example.jecpackcomposecatalogo.ui.SuperHeroView
+import com.example.jecpackcomposecatalogo.ui.SuperHeroStickyView
 import com.example.jecpackcomposecatalogo.ui.theme.AdvanceSlider
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 import com.example.jecpackcomposecatalogo.ui.theme.MyRangeSlider
@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             MyConfirmationDialog(show = show,
                                 onDismiss = { show = false })*/
 
-                            SuperHeroView()
+                            SuperHeroStickyView()
 
                         }
                     }

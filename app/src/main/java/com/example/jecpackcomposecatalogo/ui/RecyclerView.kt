@@ -1,13 +1,16 @@
 package com.example.jecpackcomposecatalogo.ui
 
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -52,12 +55,95 @@ fun SuperHeroView() {
 
 }
 
+@OptIn
+@Composable
+fun SuperHeroGriDView() {
+    val context = LocalContext.current
+    LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
+        items(getSuperHeroes()) { superhero ->
+            ItemHero(superhero = superhero)
+            {
+                Toast.makeText(context, it.superHeroName, Toast.LENGTH_LONG).show()
+            }
+
+        }
+    }, contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp))
+
+
+}
+
+@Composable
+fun SuperHeroSpecialControlsView() {
+    val context = LocalContext.current
+    val rvState = rememberLazyListState()
+    Column {
+        LazyColumn(
+            state = rvState,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.weight(1f)
+        ) {
+            items(getSuperHeroes()) { superhero ->
+                ItemHero(superhero = superhero)
+                { Toast.makeText(context, it.superHeroName, Toast.LENGTH_LONG).show() }
+            }
+
+        }
+
+
+
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(8.dp)
+        ) {
+            Text(text = "soy un button cool")
+        }
+    }
+
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun SuperHeroStickyView() {
+    val context = LocalContext.current
+    val superhero: Map<String, List<SuperHero>> = getSuperHeroes().groupBy { it.publisher }
+
+
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        superhero.forEach { (publisher, mysuperHero) ->
+
+            stickyHeader {
+                Text(
+                    text = publisher, modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Green),
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            }
+
+            items(mysuperHero) { superhero ->
+                ItemHero(superhero = superhero)
+                {
+                    Toast.makeText(context, it.superHeroName, Toast.LENGTH_LONG).show()
+                }
+
+            }
+        }
+
+    }
+
+}
+
+
 @Composable
 fun ItemHero(superhero: SuperHero, onItemSelected: (SuperHero) -> Unit) {
     Card(
         border = BorderStroke(2.dp, color = Color.Red),
         modifier = Modifier
-            .width(200.dp)
+            .fillMaxWidth()
             .clickable {
                 onItemSelected(superhero)
             }) {
@@ -95,7 +181,7 @@ fun ItemHero(superhero: SuperHero, onItemSelected: (SuperHero) -> Unit) {
 fun getSuperHeroes(): List<SuperHero> {
     return listOf(
         SuperHero("Spiderman", "Petter Parker", "Marvel", R.drawable.spiderman),
-        SuperHero("Wolverine", "Marvel", "James Howlett", R.drawable.logan),
+        SuperHero("Wolverine", "James Howlett", "Marvel", R.drawable.logan),
         SuperHero("Batman", "Bruce  wayne", "DC", R.drawable.batman),
         SuperHero("Thor", "Thor Odinson", "Marvel", R.drawable.thor),
         SuperHero("Flash", "Jay Garrick", "DC", R.drawable.flash),
