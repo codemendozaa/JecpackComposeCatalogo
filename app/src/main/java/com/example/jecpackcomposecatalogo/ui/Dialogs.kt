@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.example.jecpackcomposecatalogo.MyRadioButtonList
 
 
 @Composable
@@ -161,7 +160,7 @@ fun MyConfirmationDialog(
             MyTitleDialog(text = "Phone ringtone", modifier = Modifier.padding(24.dp))
             Divider(Modifier.fillMaxWidth(), color = Color.LightGray)
             var status by remember { mutableStateOf("") }
-            MyRadioButtonList(name = status, onItemSelected = { status = it })
+            // MyRadioButtonList(name = status, onItemSelected = { status = it })
             Divider(Modifier.fillMaxWidth(), color = Color.LightGray)
             Row(
                 Modifier

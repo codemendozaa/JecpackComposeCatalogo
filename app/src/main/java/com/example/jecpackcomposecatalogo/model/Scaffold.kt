@@ -1,10 +1,15 @@
 package com.example.jecpackcomposecatalogo.model
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
@@ -17,19 +22,22 @@ fun ScaffoldExample() {
 
     Scaffold(
         topBar = {
-            MyTopAppBar {
+            MyTopAppBar({
                 coroutineScope.launch {
                     scaffoldState.snackbarHostState.showSnackbar(
                         "HAs pulsado $it"
                     )
                 }
-            }
+            }, onclickDrawer = { coroutineScope.launch { scaffoldState.drawerState.open() } })
         },
         scaffoldState = scaffoldState,
         bottomBar = { MyBottomNavigation() },
         floatingActionButton = { MyFab() },
         floatingActionButtonPosition = FabPosition.Center,
-        isFloatingActionButtonDocked = true
+        isFloatingActionButtonDocked = false,
+        drawerContent = { MyDrawer { coroutineScope.launch { scaffoldState.drawerState.close() } } },
+        drawerGesturesEnabled = false
+
     ) {
 
     }
@@ -37,15 +45,15 @@ fun ScaffoldExample() {
 
 
 @Composable
-fun MyTopAppBar(onclickIcon: (String) -> Unit) {
+fun MyTopAppBar(onclickIcon: (String) -> Unit, onclickDrawer: () -> Unit) {
     TopAppBar(
         title = { Text(text = "My primera TopAppBar compose ") },
         backgroundColor = Color.Gray,
         contentColor = Color.White,
         elevation = 4.dp,
         navigationIcon = {
-            IconButton(onClick = { onclickIcon("Atrás") }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
+            IconButton(onClick = { onclickDrawer() }) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = "menu")
 
             }
         },
@@ -56,7 +64,7 @@ fun MyTopAppBar(onclickIcon: (String) -> Unit) {
             }
 
             IconButton(onClick = { onclickIcon("Closed") }) {
-                Icon(imageVector = Icons.Filled.Close, contentDescription = "close")
+                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
 
             }
         }
@@ -107,6 +115,35 @@ fun MyFab() {
         contentColor = Color.Black
     ) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "add")
+
+    }
+}
+
+@Composable
+fun MyDrawer(onClosedDrawer: () -> Unit) {
+    Column(Modifier.padding(8.dp)) {
+        Text(
+            text = "Primera Opcion",
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onClosedDrawer() }
+        )
+        Text(
+            text = "Segunda Opcion",
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onClosedDrawer() }
+        )
+
+        Text(
+            text = "Tercera Opcion",
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+                .clickable { onClosedDrawer() }
+        )
 
     }
 }
