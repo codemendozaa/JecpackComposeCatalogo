@@ -5,7 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import com.example.jecpackcomposecatalogo.model.ScaffoldExample
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.jecpackcomposecatalogo.model.Routes
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,9 +23,49 @@ class MainActivity : ComponentActivity() {
                     //  modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    //    var myText by remember { mutableStateOf("") }
-                    //    val mypOtions = getOptions(listOf("Code", "Example", "Check"))
-                    //  var selected by rememberSaveable { mutableStateOf("codeMendozaa") }
+
+                    val navigationController = rememberNavController()
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Routes.Pantalla1.route
+                    ) {
+                        composable(Routes.Pantalla1.route) { Screen1(navigationController) }
+                        composable(Routes.Pantalla2.route) { Screen2(navigationController) }
+                        composable(Routes.Pantalla3.route) { Screen3(navigationController) }
+                        composable(
+                            Routes.Pantalla4.route,
+                            arguments = listOf(navArgument("age") {
+                                type = NavType.IntType
+                            })
+                        ) { backStackEntry ->
+                            backStackEntry.arguments?.getInt("age")?.let {
+                                Screen4(
+                                    navigationController,
+                                    it
+                                )
+                            }
+                        }
+                        composable(
+                            Routes.Pantalla5.route,
+                            arguments = listOf(navArgument("name") {
+                                defaultValue = ""
+                            })
+                        )
+                        { backStackEntry ->
+                            backStackEntry.arguments?.getString("name")?.let {
+                                Screen5(
+                                    navigationController,
+                                    it
+                                )
+                            }
+                        }
+
+
+                    }
+                }
+                //    var myText by remember { mutableStateOf("") }
+                //    val mypOtions = getOptions(listOf("Code", "Example", "Check"))
+                //  var selected by rememberSaveable { mutableStateOf("codeMendozaa") }
 
 /*   Column {
 
@@ -30,21 +75,21 @@ class MainActivity : ComponentActivity() {
            MyCheckBoxWithTextCompleted(it)
        }*/
 
-                    //  var show by rememberSaveable { mutableStateOf(false) }
-                    //Dialog Basic
-                    /* Box(
-                         modifier = Modifier.fillMaxSize(),
-                         contentAlignment = Alignment.Center
-                     ) {
-                         Button(onClick = { show = true }) {
-                             Text(text = "Mostrar Dialogo")
-                         }
-                         MyAlertDialog(
-                             show = show,
-                             onDismiss = { show = false },
-                             onConfirm = { Log.i("codeMendoza", "Click") })*/
+                //  var show by rememberSaveable { mutableStateOf(false) }
+                //Dialog Basic
+                /* Box(
+                     modifier = Modifier.fillMaxSize(),
+                     contentAlignment = Alignment.Center
+                 ) {
+                     Button(onClick = { show = true }) {
+                         Text(text = "Mostrar Dialogo")
+                     }
+                     MyAlertDialog(
+                         show = show,
+                         onDismiss = { show = false },
+                         onConfirm = { Log.i("codeMendoza", "Click") })*/
 
-                    //MySimpleCustomDialog
+                //MySimpleCustomDialog
 // Box(
 // modifier = Modifier.fillMaxSize(),
 // contentAlignment = Alignment.Center
@@ -59,7 +104,7 @@ class MainActivity : ComponentActivity() {
 // MyConfirmationDialog(show = show,
 // onDismiss = { show = false })*/
 //
-                    ScaffoldExample()
+                //  ScaffoldExample()
 //
 // }
 // }
@@ -595,11 +640,11 @@ class MainActivity : ComponentActivity() {
 // }
 // }
 
-                }
             }
         }
     }
 }
+
 // @Preview(showBackground = true)
 // @Composable
 // fun DefaultPreview() {
