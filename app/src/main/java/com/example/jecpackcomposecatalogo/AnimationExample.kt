@@ -43,7 +43,11 @@ fun ColorAnimationSimple() {
 @Composable
 fun SizeAnimation() {
     var smallSize by rememberSaveable { mutableStateOf(true) }
-    val size by animateDpAsState(targetValue = if (smallSize) 50.dp else 100.dp)
+    val size by animateDpAsState(
+        targetValue = if (smallSize) 50.dp else 100.dp,
+        animationSpec = tween(500),
+        finishedListener = {}
+    )
     Box(
         Modifier
             .size(size)
