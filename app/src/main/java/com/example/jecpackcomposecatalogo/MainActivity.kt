@@ -23,45 +23,8 @@ class MainActivity : ComponentActivity() {
                     //  modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
-                    val navigationController = rememberNavController()
-                    NavHost(
-                        navController = navigationController,
-                        startDestination = Routes.Pantalla1.route
-                    ) {
-                        composable(Routes.Pantalla1.route) { Screen1(navigationController) }
-                        composable(Routes.Pantalla2.route) { Screen2(navigationController) }
-                        composable(Routes.Pantalla3.route) { Screen3(navigationController) }
-                        composable(
-                            Routes.Pantalla4.route,
-                            arguments = listOf(navArgument("age") {
-                                type = NavType.IntType
-                            })
-                        ) { backStackEntry ->
-                            backStackEntry.arguments?.getInt("age")?.let {
-                                Screen4(
-                                    navigationController,
-                                    it
-                                )
-                            }
-                        }
-                        composable(
-                            Routes.Pantalla5.route,
-                            arguments = listOf(navArgument("name") {
-                                defaultValue = ""
-                            })
-                        )
-                        { backStackEntry ->
-                            backStackEntry.arguments?.getString("name")?.let {
-                                Screen5(
-                                    navigationController,
-                                    it
-                                )
-                            }
-                        }
-
-
-                    }
+                    ColorAnimationSimple()
+                  
                 }
                 //    var myText by remember { mutableStateOf("") }
                 //    val mypOtions = getOptions(listOf("Code", "Example", "Check"))
