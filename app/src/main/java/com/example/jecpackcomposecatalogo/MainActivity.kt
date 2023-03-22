@@ -5,12 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.jecpackcomposecatalogo.model.Routes
 import com.example.jecpackcomposecatalogo.ui.theme.JecpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,8 +17,8 @@ class MainActivity : ComponentActivity() {
                     //  modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ColorAnimationSimple()
-                  
+                    SizeAnimation()
+
                 }
                 //    var myText by remember { mutableStateOf("") }
                 //    val mypOtions = getOptions(listOf("Code", "Example", "Check"))

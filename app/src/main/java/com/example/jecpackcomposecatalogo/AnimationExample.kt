@@ -1,11 +1,12 @@
 package com.example.jecpackcomposecatalogo
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,26 +20,34 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ColorAnimationSimple() {
     Column {
-        var firstColor by rememberSaveable {
-            mutableStateOf(false)
-        }
-        var realColor = if (firstColor) Color.Red else Color.Yellow
-        Box(
-            Modifier
-                .size(100.dp)
-                .background(realColor)
-                .clickable { firstColor = !firstColor }
+        var firstColor by rememberSaveable { mutableStateOf(false) }
+        var showBox by rememberSaveable { mutableStateOf(true) }
+        val realColor by animateColorAsState(
+            targetValue = if (firstColor) Color.Red else Color.Yellow,
+            animationSpec = tween(2000),
+            finishedListener = { showBox = false }
         )
-        Spacer(modifier = Modifier.size(200.dp))
-        var secondColor by rememberSaveable {
-            mutableStateOf(false)
+        if (showBox) {
+            Box(
+                Modifier
+                    .size(100.dp)
+                    .background(realColor)
+                    .clickable { firstColor = !firstColor }
+            )
         }
-        val realColor2 by animateColorAsState(targetValue = if (secondColor) Color.Red else Color.Yellow)
-        Box(
-            Modifier
-                .size(100.dp)
-                .background(realColor2)
-                .clickable { secondColor = !secondColor }
-        )
+
+
     }
+}
+
+@Composable
+fun SizeAnimation() {
+    var smallSize by rememberSaveable { mutableStateOf(true) }
+    val size by animateDpAsState(targetValue = if (smallSize) 50.dp else 100.dp)
+    Box(
+        Modifier
+            .size(size)
+            .background(Color.Cyan)
+            .clickable { smallSize = !smallSize }
+    )
 }
